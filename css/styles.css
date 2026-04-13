@@ -10,6 +10,7 @@
 html {
     font-size: 16px;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -18,6 +19,7 @@ body {
     line-height: 1.6;
     background-color: white;
     color: var(--dark);
+    overflow-x: hidden;
 }
 
 img {
@@ -244,7 +246,7 @@ nav a:hover {
 .hero-img::before {
     content: "";
     position: absolute;
-    background-image: url('../img/Vector 2.png');
+    background-image: url('img/Vector 2.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right top;
@@ -301,7 +303,19 @@ nav a:hover {
     z-index: -1;
 }
 
-
+/* Wave curve at the bottom of #work */
+#work::after {
+    content: "";
+    position: absolute;
+    bottom: -119px;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 120' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3E%3Cpath d='M0%2C0 L1440%2C0 L1440%2C40 Q1080%2C120 720%2C80 Q360%2C40 0%2C120 Z' fill='%23000000'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    z-index: 1;
+    pointer-events: none;
+}
 
 #work .container {
     position: relative;
