@@ -7,59 +7,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <style>
-        /* ── Language Switch ─────────────────────────────────────── */
-        .lang-switch {
-            display: flex;
-            align-items: center;
-            gap: 0.35rem;
-            background: none;
-            border: 1.5px solid #e0e0e0;
-            border-radius: 2rem;
-            padding: 0.35rem 0.75rem;
-            cursor: pointer;
-            font-family: 'Raleway', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--dark);
-            letter-spacing: 0.5px;
-            transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease;
-            white-space: nowrap;
-        }
-
-        .lang-switch:hover {
-            border-color: var(--primary);
-            background: rgba(245, 0, 65, 0.04);
-            transform: translateY(-1px);
-        }
-
-        .lang-flag {
-            font-size: 1rem;
-            line-height: 1;
-            transition: transform 0.3s ease;
-        }
-
-        .lang-switch:hover .lang-flag {
-            transform: scale(1.2);
-        }
-
-        @media (max-width: 360px) {
-            .lang-label { display: none; }
-        }
-
-        .lang-fade {
-            animation: langFadeIn 0.35s ease both;
-        }
-
-        @keyframes langFadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
+        /* lang-switch styles now in styles.css */
     </style>
 </head>
 
 <body>
 
-    <header>
+    <!-- Custom cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <header id="siteHeader">
         <div class="container">
             <nav>
                 <ul id="navLinks">
@@ -129,7 +87,7 @@
                     </div>
                     <h3 data-i18n="work.card3.title">Motion graphics <br>Video Editing</h3>
                     <p data-i18n="work.card3.desc">Creating visual stories</p>
-                    <a href="404.html" data-i18n="work.seemore">See more</a>
+                    <a href="video.html" data-i18n="work.seemore">See more</a>
                 </article>
 
                 <article class="card reveal">
@@ -275,8 +233,38 @@
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
         // ══════════════════════════════════════════════════════════════════
-        //  TRADUCCIONES
+        //  CURSOR PERSONALIZADO
         // ══════════════════════════════════════════════════════════════════
+        const cursorDot  = document.getElementById('cursorDot');
+        const cursorRing = document.getElementById('cursorRing');
+
+        let mouseX = 0, mouseY = 0;
+        let ringX  = 0, ringY  = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
+        });
+
+        (function animateRing() {
+            ringX += (mouseX - ringX) * 0.14;
+            ringY += (mouseY - ringY) * 0.14;
+            cursorRing.style.transform = `translate(calc(${ringX}px - 50%), calc(${ringY}px - 50%))`;
+            requestAnimationFrame(animateRing);
+        })();
+
+
+        // ══════════════════════════════════════════════════════════════════
+        //  STICKY HEADER SHADOW
+        // ══════════════════════════════════════════════════════════════════
+        const siteHeader = document.getElementById('siteHeader');
+        window.addEventListener('scroll', () => {
+            siteHeader.classList.toggle('scrolled', window.scrollY > 20);
+        });
+
+
+
         const translations = {
             en: {
                 nav: {

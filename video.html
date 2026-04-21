@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion & Video - Lupe Holsman</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+
+        /* ── CSS Variables (fallback si styles.css no carga) ─── */
+        :root {
+            --primary: #f50041;
+            --cyan:    #00c8c8;
+            --dark:    #111111;
+            --light:   #f7f7f7;
+        }
+
+        /* ── Lang Switch (igual al resto del sitio) ─────────── */
+        .lang-switch {
+            display: flex; align-items: center; gap: .35rem;
+            background: none; border: 1.5px solid #e0e0e0;
+            border-radius: 2rem; padding: .35rem .75rem; cursor: pointer;
+            font-family: 'Raleway', sans-serif; font-size: .8rem;
+            font-weight: 700; color: var(--dark); letter-spacing: .5px;
+            transition: border-color .25s, background .25s, transform .2s;
+            white-space: nowrap;
+        }
+        .lang-switch:hover { border-color: var(--primary); background: rgba(245,0,65,.04); transform: translateY(-1px); }
+        .lang-flag { font-size: 1rem; line-height: 1; transition: transform .3s; }
+        .lang-switch:hover .lang-flag { transform: scale(1.2); }
+        @media (max-width: 360px) { .lang-label { display: none; } }
+        .lang-fade { animation: langFadeIn .35s ease both; }
+        @keyframes langFadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── HERO ─────────────────────────────────────────────── */
+        .video-hero {
+            min-height: 92vh;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: flex-start;
+            padding: 7rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+            background: var(--dark);
+        }
+
+        /* Scanlines overlay */
+        .video-hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 3px,
+                rgba(255,255,255,.018) 3px,
+                rgba(255,255,255,.018) 4px
+            );
+            pointer-events: none; z-index: 1;
+        }
+
+        /* Red accent strip */
+        .video-hero::after {
+            content: '';
+            position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+            background: var(--primary);
+        }
+
+        /* Animated gradient blob */
+        .hero-blob {
+            position: absolute; top: -10%; right: -5%;
+            width: clamp(320px, 50vw, 700px);
+            aspect-ratio: 1;
+            background: radial-gradient(ellipse at 40% 40%, rgba(245,0,65,.28) 0%, rgba(0,200,200,.10) 55%, transparent 75%);
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: blobDrift 8s ease-in-out infinite alternate;
+            z-index: 0;
+        }
+        @keyframes blobDrift {
+            from { transform: translate(0,0) scale(1); }
+            to   { transform: translate(-40px, 30px) scale(1.08); }
+        }
+
+        .video-hero .container { position: relative; z-index: 2; }
+
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: .6rem;
+            font-size: .75rem; font-weight: 700; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--primary);
+            margin-bottom: 1.5rem;
+            animation: fadeUp .7s ease both;
+        }
+        .hero-eyebrow::before {
+            content: ''; display: inline-block;
+            width: 28px; height: 2px; background: var(--primary);
+        }
+
+        .hero-title-main {
+            font-size: clamp(2.8rem, 8vw, 7rem);
+            font-weight: 900; line-height: .95;
+            color: #fff; letter-spacing: -2px;
+            margin-bottom: 1.8rem;
+            animation: fadeUp .7s .12s ease both;
+        }
+        .hero-title-main .accent { color: var(--primary); }
+        .hero-title-main .stroke {
+            -webkit-text-stroke: 2px #fff;
+            color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1rem; color: rgba(255,255,255,.6);
+            max-width: 480px; line-height: 1.75;
+            margin-bottom: 2.5rem;
+            animation: fadeUp .7s .22s ease both;
+        }
+
+        .hero-tags {
+            display: flex; flex-wrap: wrap; gap: .6rem;
+            animation: fadeUp .7s .32s ease both;
+        }
+        .hero-tag {
+            padding: .4rem 1rem; border-radius: 2rem;
+            border: 1.5px solid rgba(255,255,255,.18);
+            font-size: .78rem; font-weight: 600;
+            color: rgba(255,255,255,.75);
+            letter-spacing: .5px;
+            transition: border-color .25s, color .25s, background .25s;
+        }
+        .hero-tag:hover { border-color: var(--primary); color: var(--primary); background: rgba(245,0,65,.06); }
+
+        /* Reel button */
+        .btn-reel {
+            display: inline-flex; align-items: center; gap: .75rem;
+            background: var(--primary); color: #fff;
+            padding: .85rem 1.8rem; border-radius: 2rem;
+            font-weight: 700; font-size: .95rem;
+            text-decoration: none;
+            transition: transform .25s, box-shadow .25s;
+            box-shadow: 0 4px 24px rgba(245,0,65,.4);
+            animation: fadeUp .7s .28s ease both;
+            margin-bottom: 2.5rem;
+        }
+        .btn-reel:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(245,0,65,.55); }
+        .btn-reel .play-icon {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: rgba(255,255,255,.2);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .btn-reel .play-icon::after {
+            content: '';
+            border-left: 9px solid #fff; border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent; margin-left: 2px;
+        }
+
+        /* Scroll indicator */
+        .scroll-hint {
+            position: absolute; bottom: 2rem; left: 50%;
+            transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center;
+            gap: .4rem; z-index: 2;
+            animation: fadeUp .7s .6s ease both;
+        }
+        .scroll-hint span {
+            font-size: .65rem; letter-spacing: 2px; font-weight: 700;
+            text-transform: uppercase; color: rgba(255,255,255,.3);
+        }
+        .scroll-line {
+            width: 1px; height: 40px;
+            background: linear-gradient(to bottom, rgba(255,255,255,.4), transparent);
+            animation: scrollDrop 1.5s ease-in-out infinite;
+        }
+        @keyframes scrollDrop {
+            0%,100% { transform: scaleY(1); opacity: 1; }
+            50%      { transform: scaleY(.5); opacity: .4; }
+        }
+
+        /* ── SECTION COMMON ───────────────────────────────────── */
+        .section-label {
+            display: inline-flex; align-items: center; gap: .5rem;
+            font-size: .7rem; font-weight: 700; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .section-label::before {
+            content: ''; width: 20px; height: 2px; background: var(--primary);
+        }
+
+        /* ── CATEGORY NAV ─────────────────────────────────────── */
+        .cat-nav {
+            background: #fff;
+            border-bottom: 1px solid #ebebeb;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .cat-nav .container {
+            display: flex; gap: 0; overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .cat-nav .container::-webkit-scrollbar { display: none; }
+        .cat-btn {
+            flex-shrink: 0;
+            padding: 1.1rem 1.6rem;
+            background: none; border: none; border-bottom: 3px solid transparent;
+            font-family: 'Raleway', sans-serif; font-size: .85rem; font-weight: 700;
+            color: #888; cursor: pointer; letter-spacing: .5px;
+            transition: color .25s, border-color .25s;
+            white-space: nowrap;
+        }
+        .cat-btn.active, .cat-btn:hover { color: var(--dark); border-bottom-color: var(--primary); }
+        .cat-btn.active { color: var(--primary); }
+
+        /* ── SUBSECTIONS ──────────────────────────────────────── */
+        .subsection { padding: 6rem 0; }
+        .subsection:nth-child(even) { background: var(--light); }
+
+        .subsection-header {
+            display: flex; align-items: flex-end;
+            justify-content: space-between; flex-wrap: wrap;
+            gap: 1rem; margin-bottom: 3rem;
+        }
+        .subsection-title {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 800; line-height: 1.05; color: var(--dark);
+        }
+        .subsection-title span { color: var(--primary); }
+        .subsection-count {
+            font-size: .75rem; font-weight: 700; letter-spacing: 2px;
+            color: #aaa; text-transform: uppercase;
+        }
+
+        /* ── REELS GRID ───────────────────────────────────────── */
+        #reels .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .reel-card {
+            position: relative; border-radius: 16px; overflow: hidden;
+            aspect-ratio: 9/16; background: #1a1a1a;
+            cursor: pointer;
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+        .reel-card:hover { transform: scale(1.03); box-shadow: 0 16px 40px rgba(0,0,0,.25); }
+        .reel-card:first-child {
+            grid-row: span 2;
+            aspect-ratio: unset;
+        }
+
+        .reel-thumb {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform .5s ease;
+        }
+        .reel-card:hover .reel-thumb { transform: scale(1.06); }
+
+        /* Placeholder gradient when no image */
+        .reel-placeholder {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .reel-placeholder .pl-icon {
+            width: 48px; height: 48px; opacity: .25;
+        }
+
+        .reel-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 50%);
+            opacity: 0; transition: opacity .3s;
+            display: flex; flex-direction: column;
+            justify-content: flex-end; padding: 1.2rem;
+        }
+        .reel-card:hover .reel-overlay { opacity: 1; }
+        .reel-title { font-size: .9rem; font-weight: 700; color: #fff; margin-bottom: .25rem; }
+        .reel-meta  { font-size: .72rem; color: rgba(255,255,255,.6); }
+
+        .play-btn {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%,-50%) scale(.8);
+            width: 52px; height: 52px; border-radius: 50%;
+            background: rgba(245,0,65,.9);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity .3s, transform .3s;
+        }
+        .play-btn::after {
+            content: '';
+            border-left: 16px solid #fff;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            margin-left: 3px;
+        }
+        .reel-card:hover .play-btn { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+
+        .reel-duration {
+            position: absolute; bottom: .7rem; right: .7rem;
+            background: rgba(0,0,0,.7); color: #fff;
+            font-size: .7rem; font-weight: 700; letter-spacing: .5px;
+            padding: .2rem .5rem; border-radius: .4rem;
+        }
+
+        /* ── LONG VIDEOS ──────────────────────────────────────── */
+        #longform .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-card {
+            background: #fff; border-radius: 16px; overflow: hidden;
+            box-shadow: 0 2px 16px rgba(0,0,0,.07);
+            transition: transform .3s, box-shadow .3s;
+        }
+        .video-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,0,0,.13); }
+
+        .video-thumb-wrap {
+            position: relative; aspect-ratio: 16/9; background: #111;
+            overflow: hidden;
+        }
+        .video-thumb {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform .5s;
+        }
+        .video-card:hover .video-thumb { transform: scale(1.04); }
+
+        .video-thumb-placeholder {
+            position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .thumb-gradient-1 { background: linear-gradient(135deg, #0a0a0a, #1c1c2e, #2d1b69); }
+        .thumb-gradient-2 { background: linear-gradient(135deg, #0d0d0d, #1a0a00, #3d1a00); }
+        .thumb-gradient-3 { background: linear-gradient(135deg, #050d1a, #0a1628, #0f3460); }
+        .thumb-gradient-4 { background: linear-gradient(135deg, #0a0a0a, #1a0a1a, #3d003d); }
+
+        .vid-play {
+            width: 60px; height: 60px; border-radius: 50%;
+            background: rgba(255,255,255,.12); border: 2px solid rgba(255,255,255,.3);
+            display: flex; align-items: center; justify-content: center;
+            transition: background .3s, transform .3s;
+        }
+        .vid-play::after {
+            content: '';
+            border-left: 20px solid rgba(255,255,255,.8);
+            border-top: 13px solid transparent;
+            border-bottom: 13px solid transparent;
+            margin-left: 4px;
+        }
+        .video-card:hover .vid-play { background: var(--primary); border-color: var(--primary); transform: scale(1.1); }
+
+        .vid-duration {
+            position: absolute; bottom: .7rem; right: .7rem;
+            background: rgba(0,0,0,.75); color: #fff;
+            font-size: .72rem; font-weight: 700;
+            padding: .2rem .5rem; border-radius: .4rem;
+        }
+
+        .video-info { padding: 1.4rem; }
+        .video-info-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: .6rem; }
+        .video-name { font-size: 1.05rem; font-weight: 800; color: var(--dark); line-height: 1.25; }
+        .vid-badge {
+            flex-shrink: 0;
+            background: var(--light); color: var(--dark);
+            font-size: .65rem; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase; padding: .25rem .65rem;
+            border-radius: 2rem;
+        }
+        .vid-badge.red { background: rgba(245,0,65,.1); color: var(--primary); }
+        .video-desc { font-size: .85rem; color: #777; line-height: 1.6; margin-bottom: 1rem; }
+        .vid-meta { display: flex; gap: 1rem; font-size: .75rem; color: #aaa; font-weight: 600; }
+
+        /* ── ANIMATIONS ───────────────────────────────────────── */
+        #animations .anim-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        @media (max-width: 768px) { #animations .anim-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 480px) { #animations .anim-grid { grid-template-columns: 1fr; } }
+
+        .anim-card {
+            border-radius: 20px; overflow: hidden;
+            position: relative; aspect-ratio: 1;
+            cursor: pointer;
+            transition: transform .35s ease;
+        }
+        .anim-card:hover { transform: scale(1.04); }
+        .anim-card:nth-child(1) { grid-column: span 2; aspect-ratio: unset; min-height: 280px; }
+
+        .anim-bg {
+            position: absolute; inset: 0;
+            transition: transform .5s ease;
+        }
+        .anim-card:hover .anim-bg { transform: scale(1.06); }
+
+        /* Gradient themes per card */
+        .anim-1  { background: linear-gradient(135deg, #0d0d0d 0%, #1a0005 50%, #f50041 100%); }
+        .anim-2  { background: linear-gradient(135deg, #001a1a 0%, #003333 50%, #00c8c8 100%); }
+        .anim-3  { background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #4444ff 100%); }
+        .anim-4  { background: linear-gradient(135deg, #1a0a00 0%, #331500 50%, #ff6600 100%); }
+        .anim-5  { background: linear-gradient(135deg, #0d000d 0%, #220022 50%, #aa00aa 100%); }
+
+        /* SVG motion decoration inside cards */
+        .anim-deco {
+            position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            opacity: .18;
+        }
+        .anim-deco svg { width: 70%; height: 70%; }
+
+        .anim-info {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,.9) 35%, transparent 75%);
+            display: flex; flex-direction: column;
+            justify-content: flex-end; padding: 1.4rem;
+        }
+        .anim-name { font-size: 1rem; font-weight: 800; color: #fff; margin-bottom: .3rem; }
+        .anim-tag {
+            display: inline-block;
+            background: rgba(255,255,255,.12); color: rgba(255,255,255,.7);
+            font-size: .65rem; font-weight: 700; letter-spacing: 1.5px;
+            text-transform: uppercase; padding: .25rem .65rem;
+            border-radius: 2rem; width: fit-content;
+        }
+
+        /* Hover reveal extra info */
+        .anim-hover {
+            position: absolute; inset: 0;
+            background: rgba(245,0,65,.92);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: .7rem; opacity: 0;
+            transition: opacity .3s;
+            text-align: center; padding: 1.5rem;
+        }
+        .anim-card:hover .anim-hover { opacity: 1; }
+        .anim-hover p { color: rgba(255,255,255,.9); font-size: .88rem; line-height: 1.6; }
+        .anim-hover .tools {
+            display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center;
+        }
+        .anim-tool {
+            background: rgba(255,255,255,.2); color: #fff;
+            font-size: .65rem; font-weight: 700; letter-spacing: 1px;
+            text-transform: uppercase; padding: .2rem .6rem; border-radius: 2rem;
+        }
+
+        /* ── PROCESS / TOOLS STRIP ────────────────────────────── */
+        .tools-strip {
+            background: var(--dark); padding: 5rem 0;
+        }
+        .tools-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem; align-items: center;
+        }
+        @media (max-width: 768px) { .tools-inner { grid-template-columns: 1fr; } }
+
+        .tools-text h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 800; color: #fff; line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .tools-text h2 span { color: var(--primary); }
+        .tools-text p { color: rgba(255,255,255,.55); line-height: 1.75; font-size: .95rem; }
+
+        .tools-list {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+        }
+        .tool-item {
+            background: rgba(255,255,255,.05);
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 14px; padding: 1.2rem;
+            transition: border-color .25s, background .25s;
+        }
+        .tool-item:hover { border-color: var(--primary); background: rgba(245,0,65,.06); }
+        .tool-name { font-size: .9rem; font-weight: 700; color: #fff; margin-bottom: .25rem; }
+        .tool-desc { font-size: .75rem; color: rgba(255,255,255,.4); }
+
+        /* ── SHOWREEL CTA ─────────────────────────────────────── */
+        .cta-strip {
+            background: var(--primary); padding: 5rem 0;
+            position: relative; overflow: hidden;
+            text-align: center;
+        }
+        .cta-strip::before {
+            content: 'PLAY';
+            position: absolute; right: -2%; top: 50%;
+            transform: translateY(-50%);
+            font-size: clamp(8rem, 18vw, 16rem);
+            font-weight: 900; color: rgba(255,255,255,.07);
+            letter-spacing: -5px; user-select: none;
+            white-space: nowrap;
+        }
+        .cta-strip .container { position: relative; z-index: 1; }
+        .cta-strip h2 { font-size: clamp(1.8rem, 4vw, 3.2rem); font-weight: 900; color: #fff; margin-bottom: 1rem; }
+        .cta-strip p { color: rgba(255,255,255,.75); margin-bottom: 2rem; font-size: 1rem; }
+        .btn-white {
+            display: inline-flex; align-items: center; gap: .6rem;
+            background: #fff; color: var(--primary);
+            padding: .85rem 1.8rem; border-radius: 2rem;
+            font-weight: 800; font-size: .95rem;
+            text-decoration: none;
+            transition: transform .25s, box-shadow .25s;
+            box-shadow: 0 4px 20px rgba(0,0,0,.2);
+        }
+        .btn-white:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,.3); }
+        .btn-white::before {
+            content: '▶';
+            font-size: .8rem;
+        }
+
+        /* ── REVEAL ANIMATIONS ────────────────────────────────── */
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+        .reveal-left  { opacity: 0; transform: translateX(-28px); transition: opacity .7s ease, transform .7s ease; }
+        .reveal-left.is-visible { opacity: 1; transform: translateX(0); }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── RESPONSIVE TWEAKS ────────────────────────────────── */
+        @media (max-width: 768px) {
+            #reels .grid { grid-template-columns: 1fr 1fr; }
+            .reel-card:first-child { grid-row: unset; }
+            #longform .grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            #reels .grid { grid-template-columns: 1fr; }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ══ HEADER (idéntico al resto del sitio) ═════════════ -->
+    <header>
+        <div class="container">
+            <nav>
+                <ul id="navLinks">
+                    <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+                    <li><a href="404.html"   data-i18n="nav.about">About</a></li>
+                    <li><a href="404.html"   data-i18n="nav.work">My Work</a></li>
+                </ul>
+                <div class="nav-right">
+                    <button class="lang-switch" id="langSwitch" aria-label="Switch language">
+                        <span class="lang-flag" id="langFlag">🇦🇷</span>
+                        <span class="lang-label" id="langLabel">ES</span>
+                    </button>
+                    <a href="index.html#contact" class="btn" data-i18n="nav.contact">Get in touch</a>
+                    <button class="hamburger" id="hamburger" aria-label="Menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ══ HERO ══════════════════════════════════════════════ -->
+    <section class="video-hero">
+        <div class="hero-blob"></div>
+        <div class="container">
+            <p class="hero-eyebrow" data-i18n="vhero.eyebrow">Motion & Video</p>
+            <h1 class="hero-title-main">
+                <span data-i18n="vhero.line1">Stories</span><br>
+                <span class="stroke" data-i18n="vhero.line2">that</span>
+                <span class="accent" data-i18n="vhero.line3">move.</span>
+            </h1>
+            <p class="hero-desc" data-i18n="vhero.desc">
+                From vertical reels to feature-length edits and frame-by-frame animation — visual storytelling built to captivate.
+            </p>
+            <a href="#reels" class="btn-reel" data-i18n="vhero.cta">
+                <span class="play-icon"></span>
+                Watch showreel
+            </a>
+            <div class="hero-tags">
+                <span class="hero-tag">Premiere Pro</span>
+                <span class="hero-tag">After Effects</span>
+                <span class="hero-tag">DaVinci Resolve</span>
+                <span class="hero-tag">Reels</span>
+                <span class="hero-tag">Motion Graphics</span>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <span data-i18n="vhero.scroll">Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ══ CATEGORY NAV ══════════════════════════════════════ -->
+    <nav class="cat-nav" aria-label="Categories">
+        <div class="container">
+            <button class="cat-btn active" data-target="reels"     data-i18n="cat.reels">Reels</button>
+            <button class="cat-btn"        data-target="longform"  data-i18n="cat.long">Long Videos</button>
+            <button class="cat-btn"        data-target="animations"data-i18n="cat.anim">Animations</button>
+        </div>
+    </nav>
+
+    <!-- ══ SECTION 1: REELS ══════════════════════════════════ -->
+    <section class="subsection" id="reels">
+        <div class="container">
+            <div class="subsection-header reveal">
+                <div>
+                    <p class="section-label" data-i18n="reels.label">Reels & Short-form</p>
+                    <h2 class="subsection-title" data-i18n="reels.title">Vertical <span>Reels</span></h2>
+                </div>
+                <span class="subsection-count" data-i18n="reels.count">6 pieces</span>
+            </div>
+
+            <div class="grid">
+                <!-- Card 1 – featured tall -->
+                <article class="reel-card reveal">
+                    <div class="reel-placeholder" style="background:linear-gradient(160deg,#0d0d0d,#1a0005,#3d0015);">
+                        <svg class="pl-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="24" cy="24" r="22" stroke="white" stroke-width="2"/>
+                            <polygon points="19,14 37,24 19,34" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="reel-overlay">
+                        <p class="reel-title" data-i18n="reels.r1.title">Brand Reel — AW24</p>
+                        <p class="reel-meta" data-i18n="reels.r1.meta">Fashion · Premiere Pro</p>
+                    </div>
+                    <div class="play-btn"></div>
+                    <span class="reel-duration">0:45</span>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="reel-card reveal">
+                    <div class="reel-placeholder" style="background:linear-gradient(160deg,#001a0d,#003320,#005a35);">
+                        <svg class="pl-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="white" stroke-width="2"/><polygon points="19,14 37,24 19,34" fill="white"/></svg>
+                    </div>
+                    <div class="reel-overlay">
+                        <p class="reel-title" data-i18n="reels.r2.title">Food Promo</p>
+                        <p class="reel-meta" data-i18n="reels.r2.meta">Gastronomy · After Effects</p>
+                    </div>
+                    <div class="play-btn"></div>
+                    <span class="reel-duration">0:30</span>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="reel-card reveal">
+                    <div class="reel-placeholder" style="background:linear-gradient(160deg,#0a0a1a,#1a1a40,#2a2a70);">
+                        <svg class="pl-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="white" stroke-width="2"/><polygon points="19,14 37,24 19,34" fill="white"/></svg>
+                    </div>
+                    <div class="reel-overlay">
+                        <p class="reel-title" data-i18n="reels.r3.title">Music Teaser</p>
+                        <p class="reel-meta" data-i18n="reels.r3.meta">Music · DaVinci Resolve</p>
+                    </div>
+                    <div class="play-btn"></div>
+                    <span class="reel-duration">0:58</span>
+                </article>
+
+                <!-- Card 4 -->
+                <article class="reel-card reveal">
+                    <div class="reel-placeholder" style="background:linear-gradient(160deg,#1a0a00,#3d1500,#6b2600);">
+                        <svg class="pl-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="white" stroke-width="2"/><polygon points="19,14 37,24 19,34" fill="white"/></svg>
+                    </div>
+                    <div class="reel-overlay">
+                        <p class="reel-title" data-i18n="reels.r4.title">Event Coverage</p>
+                        <p class="reel-meta" data-i18n="reels.r4.meta">Events · Premiere Pro</p>
+                    </div>
+                    <div class="play-btn"></div>
+                    <span class="reel-duration">1:00</span>
+                </article>
+
+                <!-- Card 5 -->
+                <article class="reel-card reveal">
+                    <div class="reel-placeholder" style="background:linear-gradient(160deg,#0a001a,#200040,#3d006b);">
+                        <svg class="pl-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="white" stroke-width="2"/><polygon points="19,14 37,24 19,34" fill="white"/></svg>
+                    </div>
+                    <div class="reel-overlay">
+                        <p class="reel-title" data-i18n="reels.r5.title">Product Showcase</p>
+                        <p class="reel-meta" data-i18n="reels.r5.meta">E-commerce · After Effects</p>
+                    </div>
+                    <div class="play-btn"></div>
+                    <span class="reel-duration">0:28</span>
+                </article>
+
+                <!-- Card 6 -->
+                <article class="reel-card reveal">
+                    <div class="reel-placeholder" style="background:linear-gradient(160deg,#001a1a,#003535,#005f5f);">
+                        <svg class="pl-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="white" stroke-width="2"/><polygon points="19,14 37,24 19,34" fill="white"/></svg>
+                    </div>
+                    <div class="reel-overlay">
+                        <p class="reel-title" data-i18n="reels.r6.title">Portfolio Reel</p>
+                        <p class="reel-meta" data-i18n="reels.r6.meta">Personal · Mixed</p>
+                    </div>
+                    <div class="play-btn"></div>
+                    <span class="reel-duration">1:30</span>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ SECTION 2: LONG VIDEOS ════════════════════════════ -->
+    <section class="subsection" id="longform">
+        <div class="container">
+            <div class="subsection-header reveal">
+                <div>
+                    <p class="section-label" data-i18n="long.label">Long-form</p>
+                    <h2 class="subsection-title" data-i18n="long.title">Long <span>Videos</span></h2>
+                </div>
+                <span class="subsection-count" data-i18n="long.count">4 projects</span>
+            </div>
+
+            <div class="grid">
+                <!-- Video 1 -->
+                <article class="video-card reveal">
+                    <div class="video-thumb-wrap">
+                        <div class="video-thumb-placeholder thumb-gradient-1">
+                            <div class="vid-play"></div>
+                        </div>
+                        <span class="vid-duration">12:34</span>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-info-top">
+                            <h3 class="video-name" data-i18n="long.v1.name">Brand Documentary</h3>
+                            <span class="vid-badge red" data-i18n="long.v1.badge">Documentary</span>
+                        </div>
+                        <p class="video-desc" data-i18n="long.v1.desc">A mini-documentary telling the origin story of a local fashion brand through interviews and b-roll.</p>
+                        <div class="vid-meta">
+                            <span data-i18n="long.v1.tool">Premiere Pro</span>
+                            <span data-i18n="long.v1.year">2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Video 2 -->
+                <article class="video-card reveal">
+                    <div class="video-thumb-wrap">
+                        <div class="video-thumb-placeholder thumb-gradient-2">
+                            <div class="vid-play"></div>
+                        </div>
+                        <span class="vid-duration">8:12</span>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-info-top">
+                            <h3 class="video-name" data-i18n="long.v2.name">Campus Tour Video</h3>
+                            <span class="vid-badge" data-i18n="long.v2.badge">Institutional</span>
+                        </div>
+                        <p class="video-desc" data-i18n="long.v2.desc">Full production tour featuring motion title cards and smooth color grading for a university.</p>
+                        <div class="vid-meta">
+                            <span data-i18n="long.v2.tool">DaVinci Resolve</span>
+                            <span data-i18n="long.v2.year">2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Video 3 -->
+                <article class="video-card reveal">
+                    <div class="video-thumb-wrap">
+                        <div class="video-thumb-placeholder thumb-gradient-3">
+                            <div class="vid-play"></div>
+                        </div>
+                        <span class="vid-duration">20:05</span>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-info-top">
+                            <h3 class="video-name" data-i18n="long.v3.name">Event Recap — Full</h3>
+                            <span class="vid-badge red" data-i18n="long.v3.badge">Event</span>
+                        </div>
+                        <p class="video-desc" data-i18n="long.v3.desc">Complete multi-camera edit of a live cultural event with synced audio and subtitles.</p>
+                        <div class="vid-meta">
+                            <span data-i18n="long.v3.tool">Premiere Pro</span>
+                            <span data-i18n="long.v3.year">2023</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Video 4 -->
+                <article class="video-card reveal">
+                    <div class="video-thumb-wrap">
+                        <div class="video-thumb-placeholder thumb-gradient-4">
+                            <div class="vid-play"></div>
+                        </div>
+                        <span class="vid-duration">5:50</span>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-info-top">
+                            <h3 class="video-name" data-i18n="long.v4.name">Music Video</h3>
+                            <span class="vid-badge" data-i18n="long.v4.badge">Music</span>
+                        </div>
+                        <p class="video-desc" data-i18n="long.v4.desc">Narrative music video with motion graphic overlays and cinematic color treatment.</p>
+                        <div class="vid-meta">
+                            <span data-i18n="long.v4.tool">After Effects + Premiere</span>
+                            <span data-i18n="long.v4.year">2023</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ TOOLS STRIP ════════════════════════════════════════ -->
+    <div class="tools-strip">
+        <div class="container tools-inner">
+            <div class="tools-text reveal-left">
+                <p class="section-label" style="color:var(--primary);" data-i18n="tools.label">My toolkit</p>
+                <h2 data-i18n="tools.title">Built with the <span>right tools.</span></h2>
+                <p data-i18n="tools.desc">Every project starts with the best software for the job — from quick turnaround edits to complex motion design timelines.</p>
+            </div>
+            <div class="tools-list reveal">
+                <div class="tool-item">
+                    <p class="tool-name">Adobe Premiere Pro</p>
+                    <p class="tool-desc" data-i18n="tools.t1">Editing, cuts, audio sync</p>
+                </div>
+                <div class="tool-item">
+                    <p class="tool-name">After Effects</p>
+                    <p class="tool-desc" data-i18n="tools.t2">Motion graphics, VFX</p>
+                </div>
+                <div class="tool-item">
+                    <p class="tool-name">DaVinci Resolve</p>
+                    <p class="tool-desc" data-i18n="tools.t3">Color grading, Fusion</p>
+                </div>
+                <div class="tool-item">
+                    <p class="tool-name">CapCut</p>
+                    <p class="tool-desc" data-i18n="tools.t4">Fast social edits</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ SECTION 3: ANIMATIONS ═════════════════════════════ -->
+    <section class="subsection" id="animations">
+        <div class="container">
+            <div class="subsection-header reveal">
+                <div>
+                    <p class="section-label" data-i18n="anim.label">Motion Design</p>
+                    <h2 class="subsection-title" data-i18n="anim.title"><span>Animations</span></h2>
+                </div>
+                <span class="subsection-count" data-i18n="anim.count">5 pieces</span>
+            </div>
+
+            <div class="anim-grid">
+                <!-- Anim 1 – wide featured -->
+                <article class="anim-card reveal">
+                    <div class="anim-bg anim-1"></div>
+                    <div class="anim-deco">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+                            <circle cx="100" cy="100" r="80" stroke="white" stroke-width="3" stroke-dasharray="20 10"/>
+                            <path d="M40 100 Q100 40 160 100 Q100 160 40 100Z" stroke="white" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="anim-info">
+                        <p class="anim-name" data-i18n="anim.a1.name">Logo Animation — Brand Identity</p>
+                        <span class="anim-tag" data-i18n="anim.a1.tag">After Effects</span>
+                    </div>
+                    <div class="anim-hover">
+                        <p data-i18n="anim.a1.hover">Reveal animation for a full brand identity, including logo stingers and lower-thirds.</p>
+                        <div class="tools">
+                            <span class="anim-tool">After Effects</span>
+                            <span class="anim-tool">Illustrator</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Anim 2 -->
+                <article class="anim-card reveal">
+                    <div class="anim-bg anim-2"></div>
+                    <div class="anim-deco">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+                            <rect x="30" y="30" width="140" height="140" rx="20" stroke="white" stroke-width="3"/>
+                            <line x1="30" y1="100" x2="170" y2="100" stroke="white" stroke-width="2"/>
+                            <line x1="100" y1="30" x2="100" y2="170" stroke="white" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="anim-info">
+                        <p class="anim-name" data-i18n="anim.a2.name">UI Motion Kit</p>
+                        <span class="anim-tag" data-i18n="anim.a2.tag">After Effects</span>
+                    </div>
+                    <div class="anim-hover">
+                        <p data-i18n="anim.a2.hover">Animated UI components for a digital product — transitions, loading states and micro-interactions.</p>
+                        <div class="tools">
+                            <span class="anim-tool">After Effects</span>
+                            <span class="anim-tool">Figma</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Anim 3 -->
+                <article class="anim-card reveal">
+                    <div class="anim-bg anim-3"></div>
+                    <div class="anim-deco">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+                            <polygon points="100,20 180,160 20,160" stroke="white" stroke-width="3"/>
+                            <circle cx="100" cy="120" r="25" stroke="white" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="anim-info">
+                        <p class="anim-name" data-i18n="anim.a3.name">Kinetic Typography</p>
+                        <span class="anim-tag" data-i18n="anim.a3.tag">After Effects</span>
+                    </div>
+                    <div class="anim-hover">
+                        <p data-i18n="anim.a3.hover">Text-driven motion piece where words become the visual storytelling element.</p>
+                        <div class="tools">
+                            <span class="anim-tool">After Effects</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Anim 4 -->
+                <article class="anim-card reveal">
+                    <div class="anim-bg anim-4"></div>
+                    <div class="anim-deco">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+                            <path d="M20 100 C 60 20, 140 20, 180 100 C 140 180, 60 180, 20 100 Z" stroke="white" stroke-width="3"/>
+                        </svg>
+                    </div>
+                    <div class="anim-info">
+                        <p class="anim-name" data-i18n="anim.a4.name">Social Animated Stories</p>
+                        <span class="anim-tag" data-i18n="anim.a4.tag">After Effects</span>
+                    </div>
+                    <div class="anim-hover">
+                        <p data-i18n="anim.a4.hover">Set of 10 animated Instagram Stories templates with dynamic transitions and brand colors.</p>
+                        <div class="tools">
+                            <span class="anim-tool">After Effects</span>
+                            <span class="anim-tool">Premiere Pro</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Anim 5 -->
+                <article class="anim-card reveal">
+                    <div class="anim-bg anim-5"></div>
+                    <div class="anim-deco">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
+                            <circle cx="100" cy="100" r="70" stroke="white" stroke-width="3"/>
+                            <circle cx="100" cy="100" r="40" stroke="white" stroke-width="2"/>
+                            <circle cx="100" cy="100" r="10" fill="white" opacity=".5"/>
+                        </svg>
+                    </div>
+                    <div class="anim-info">
+                        <p class="anim-name" data-i18n="anim.a5.name">Intro Animation</p>
+                        <span class="anim-tag" data-i18n="anim.a5.tag">After Effects</span>
+                    </div>
+                    <div class="anim-hover">
+                        <p data-i18n="anim.a5.hover">Custom YouTube channel intro with particle effects and synced audio animation.</p>
+                        <div class="tools">
+                            <span class="anim-tool">After Effects</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ CTA ════════════════════════════════════════════════ -->
+    <section class="cta-strip">
+        <div class="container">
+            <h2 data-i18n="cta.title">Got a video project?</h2>
+            <p data-i18n="cta.desc">Let's make something people can't stop watching.</p>
+            <a href="index.html#contact" class="btn-white" data-i18n="cta.btn">Let's talk</a>
+        </div>
+    </section>
+
+    <!-- ══ FOOTER ════════════════════════════════════════════ -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h3>LUPE HOLSMAN</h3>
+                <p data-i18n="footer.role">Multimedia Designer</p>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-contact">
+                <p>+54 221 596 4111</p>
+                <p>guadalupeholsman@gmail.com</p>
+                <p>La Plata, Buenos Aires, Argentina</p>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-icon"><img src="img/icon-whatsapp.png" alt="WhatsApp"></a>
+                <a href="#" class="social-icon"><img src="img/icon-linkedin.png" alt="LinkedIn"></a>
+                <a href="#" class="social-icon"><img src="img/icon-instagram.png" alt="Instagram"></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // ══════════════════════════════════════════════════════════
+    //  TRADUCCIONES
+    // ══════════════════════════════════════════════════════════
+    const translations = {
+        en: {
+            nav: { home:'Home', about:'About', work:'My Work', contact:'Get in touch' },
+            footer: { role: 'Multimedia Designer' },
+            vhero: {
+                eyebrow: 'Motion & Video',
+                line1: 'Stories', line2: 'that', line3: 'move.',
+                desc: "From vertical reels to feature-length edits and frame-by-frame animation — visual storytelling built to captivate.",
+                cta: 'Watch showreel', scroll: 'Scroll'
+            },
+            cat:  { reels:'Reels', long:'Long Videos', anim:'Animations' },
+            reels: {
+                label:'Reels & Short-form', title:'Vertical Reels', count:'6 pieces',
+                r1:{ title:'Brand Reel — AW24',   meta:'Fashion · Premiere Pro' },
+                r2:{ title:'Food Promo',           meta:'Gastronomy · After Effects' },
+                r3:{ title:'Music Teaser',         meta:'Music · DaVinci Resolve' },
+                r4:{ title:'Event Coverage',       meta:'Events · Premiere Pro' },
+                r5:{ title:'Product Showcase',     meta:'E-commerce · After Effects' },
+                r6:{ title:'Portfolio Reel',       meta:'Personal · Mixed' },
+            },
+            long: {
+                label:'Long-form', title:'Long Videos', count:'4 projects',
+                v1:{ name:'Brand Documentary',    badge:'Documentary', desc:'A mini-documentary telling the origin story of a local fashion brand through interviews and b-roll.',  tool:'Premiere Pro', year:'2024' },
+                v2:{ name:'Campus Tour Video',    badge:'Institutional', desc:'Full production tour featuring motion title cards and smooth color grading for a university.', tool:'DaVinci Resolve', year:'2024' },
+                v3:{ name:'Event Recap — Full',   badge:'Event', desc:'Complete multi-camera edit of a live cultural event with synced audio and subtitles.', tool:'Premiere Pro', year:'2023' },
+                v4:{ name:'Music Video',          badge:'Music', desc:'Narrative music video with motion graphic overlays and cinematic color treatment.', tool:'After Effects + Premiere', year:'2023' },
+            },
+            tools: {
+                label:'My toolkit', title:'Built with the right tools.',
+                desc:'Every project starts with the best software for the job — from quick turnaround edits to complex motion design timelines.',
+                t1:'Editing, cuts, audio sync', t2:'Motion graphics, VFX',
+                t3:'Color grading, Fusion', t4:'Fast social edits'
+            },
+            anim: {
+                label:'Motion Design', title:'Animations', count:'5 pieces',
+                a1:{ name:'Logo Animation — Brand Identity', tag:'After Effects', hover:'Reveal animation for a full brand identity, including logo stingers and lower-thirds.' },
+                a2:{ name:'UI Motion Kit', tag:'After Effects', hover:'Animated UI components for a digital product — transitions, loading states and micro-interactions.' },
+                a3:{ name:'Kinetic Typography', tag:'After Effects', hover:'Text-driven motion piece where words become the visual storytelling element.' },
+                a4:{ name:'Social Animated Stories', tag:'After Effects', hover:'Set of 10 animated Instagram Stories templates with dynamic transitions and brand colors.' },
+                a5:{ name:'Intro Animation', tag:'After Effects', hover:'Custom YouTube channel intro with particle effects and synced audio animation.' },
+            },
+            cta: { title:"Got a video project?", desc:"Let's make something people can't stop watching.", btn:"Let's talk" }
+        },
+        es: {
+            nav: { home:'Inicio', about:'Sobre mí', work:'Mi trabajo', contact:'Contactame' },
+            footer: { role: 'Diseñadora Multimedia' },
+            vhero: {
+                eyebrow: 'Motion & Video',
+                line1: 'Historias', line2: 'que', line3: 'mueven.',
+                desc: "De reels verticales a ediciones de largo metraje y animación cuadro a cuadro — storytelling visual diseñado para capturar.",
+                cta: 'Ver showreel', scroll: 'Bajar'
+            },
+            cat:  { reels:'Reels', long:'Videos largos', anim:'Animaciones' },
+            reels: {
+                label:'Reels y contenido corto', title:'Reels verticales', count:'6 piezas',
+                r1:{ title:'Brand Reel — AW24',   meta:'Moda · Premiere Pro' },
+                r2:{ title:'Promo gastronómica',   meta:'Gastronomía · After Effects' },
+                r3:{ title:'Teaser musical',       meta:'Música · DaVinci Resolve' },
+                r4:{ title:'Cobertura de evento',  meta:'Eventos · Premiere Pro' },
+                r5:{ title:'Showcase de producto', meta:'E-commerce · After Effects' },
+                r6:{ title:'Reel de portfolio',    meta:'Personal · Mixed' },
+            },
+            long: {
+                label:'Largo metraje', title:'Videos largos', count:'4 proyectos',
+                v1:{ name:'Documental de marca',    badge:'Documental', desc:'Mini-documental sobre el origen de una marca de moda local, con entrevistas y b-roll.', tool:'Premiere Pro', year:'2024' },
+                v2:{ name:'Tour del campus',         badge:'Institucional', desc:'Producción completa con títulos animados y corrección de color para una universidad.', tool:'DaVinci Resolve', year:'2024' },
+                v3:{ name:'Recap de evento — completo', badge:'Evento', desc:'Edición multicámara de un evento cultural en vivo con audio sincronizado y subtítulos.', tool:'Premiere Pro', year:'2023' },
+                v4:{ name:'Videoclip musical',       badge:'Música', desc:'Videoclip narrativo con motion graphics y tratamiento de color cinematográfico.', tool:'After Effects + Premiere', year:'2023' },
+            },
+            tools: {
+                label:'Mi kit', title:'Con las herramientas correctas.',
+                desc:'Cada proyecto arranca eligiendo el software ideal — desde ediciones rápidas hasta timelines de motion design complejos.',
+                t1:'Edición, cortes, audio sync', t2:'Motion graphics, VFX',
+                t3:'Corrección de color, Fusion', t4:'Ediciones rápidas para redes'
+            },
+            anim: {
+                label:'Motion Design', title:'Animaciones', count:'5 piezas',
+                a1:{ name:'Animación de logo — Identidad de marca', tag:'After Effects', hover:'Animación de reveal para una identidad de marca completa, incluyendo logo stingers y lower-thirds.' },
+                a2:{ name:'UI Motion Kit', tag:'After Effects', hover:'Componentes de UI animados para un producto digital — transiciones, estados de carga y microinteracciones.' },
+                a3:{ name:'Tipografía cinética', tag:'After Effects', hover:'Pieza de motion donde las palabras son el elemento visual protagonista.' },
+                a4:{ name:'Stories animadas para redes', tag:'After Effects', hover:'Pack de 10 templates animados para Instagram Stories con transiciones dinámicas y colores de marca.' },
+                a5:{ name:'Animación de intro', tag:'After Effects', hover:'Intro de canal de YouTube con efectos de partículas y animación de audio sincronizada.' },
+            },
+            cta: { title:"¿Tenés un proyecto de video?", desc:"Hagamos algo que la gente no pueda dejar de ver.", btn:"Hablemos" }
+        }
+    };
+
+    // ══════════════════════════════════════════════════════════
+    //  MOTOR DE TRADUCCIÓN
+    // ══════════════════════════════════════════════════════════
+    function getT(lang, key) {
+        return key.split('.').reduce((obj,k) => (obj && obj[k] !== undefined ? obj[k] : null), translations[lang]);
+    }
+    function applyLang(lang) {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const val = getT(lang, el.dataset.i18n);
+            if (val !== null) {
+                el.innerHTML = val;
+                el.classList.add('lang-fade');
+                el.addEventListener('animationend', () => el.classList.remove('lang-fade'), { once:true });
+            }
+        });
+        document.documentElement.lang = lang;
+        const isES = lang === 'es';
+        document.getElementById('langFlag').textContent  = isES ? '🇺🇸' : '🇦🇷';
+        document.getElementById('langLabel').textContent = isES ? 'EN' : 'ES';
+    }
+
+    let currentLang = localStorage.getItem('lupe-lang') || 'en';
+    applyLang(currentLang);
+    document.getElementById('langSwitch').addEventListener('click', () => {
+        currentLang = currentLang === 'en' ? 'es' : 'en';
+        localStorage.setItem('lupe-lang', currentLang);
+        applyLang(currentLang);
+    });
+
+    // ══════════════════════════════════════════════════════════
+    //  HAMBURGER
+    // ══════════════════════════════════════════════════════════
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('mobile-open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('mobile-open');
+    }));
+
+    // ══════════════════════════════════════════════════════════
+    //  CATEGORY NAV — smooth scroll + active
+    // ══════════════════════════════════════════════════════════
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const target = document.getElementById(btn.dataset.target);
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    // Sync active cat on scroll
+    const sections = ['reels','longform','animations'].map(id => document.getElementById(id));
+    const catBtns  = document.querySelectorAll('.cat-btn');
+    const catNav   = document.querySelector('.cat-nav');
+    const catNavH  = catNav.offsetHeight + 70;
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(sec => {
+            if (sec && window.scrollY >= sec.offsetTop - catNavH) current = sec.id;
+        });
+        catBtns.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.target === current);
+        });
+    });
+
+    // ══════════════════════════════════════════════════════════
+    //  REVEAL OBSERVER
+    // ══════════════════════════════════════════════════════════
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.classList.add('is-visible');
+            observer.unobserve(e.target);
+        });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal, .reveal-left').forEach(el => observer.observe(el));
+
+    </script>
+</body>
+</html>
