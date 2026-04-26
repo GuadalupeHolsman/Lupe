@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion & Video – Lupe Holsman</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+
+        /* ══════════════════════════════════════════════
+           VIDEO PAGE — HERO
+        ══════════════════════════════════════════════ */
+        .video-hero {
+            min-height: 62vh;
+            padding: 8rem 0 5rem;
+            position: relative;
+            overflow: hidden;
+            background: white;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Grain texture — igual al index */
+        .video-hero-grain {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            background-size: 150px 150px;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        /* Blob rojo — esquina superior derecha */
+        .video-hero-blob-red {
+            position: absolute;
+            top: -80px;
+            right: -140px;
+            width: 560px;
+            height: 560px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(245,0,65,0.07) 0%, transparent 68%);
+            pointer-events: none;
+            animation: pulseSoft 8s ease-in-out infinite;
+        }
+
+        /* Blob cyan — esquina inferior izquierda */
+        .video-hero-blob-cyan {
+            position: absolute;
+            bottom: -60px;
+            left: -100px;
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,210,211,0.08) 0%, transparent 68%);
+            pointer-events: none;
+            animation: pulseSoft 10s ease-in-out 2s infinite;
+        }
+
+        /* Línea decorativa vertical — guiño al mundo film */
+        .video-hero-line {
+            position: absolute;
+            top: 0;
+            right: 18%;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(245,0,65,0.12), transparent);
+            pointer-events: none;
+        }
+
+        @keyframes pulseSoft {
+            0%, 100% { transform: scale(1);    opacity: 1; }
+            50%       { transform: scale(1.06); opacity: 0.7; }
+        }
+
+        .video-hero-inner {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        /* Back link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 2.8rem;
+            transition: color 0.3s ease, gap 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+            gap: 0.8rem;
+        }
+
+        .back-link svg {
+            transition: transform 0.3s ease;
+        }
+
+        .back-link:hover svg {
+            transform: translateX(-4px);
+        }
+
+        /* Page tag */
+        .page-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            background: var(--primary);
+            color: white;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            padding: 0.38rem 1rem;
+            border-radius: 2rem;
+            margin-bottom: 1.4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* shimmer en el tag — igual al 404 */
+        .page-tag::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            animation: shimmerTag 3.5s ease-in-out 1s infinite;
+        }
+
+        @keyframes shimmerTag {
+            to { transform: translateX(100%); }
+        }
+
+        .page-tag .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: white;
+            animation: blink 1.5s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.25; }
+        }
+
+        /* Título principal */
+        .video-hero h1 {
+            font-size: clamp(3rem, 7vw, 5.8rem);
+            font-weight: 800;
+            line-height: 0.92;
+            letter-spacing: -3px;
+            color: var(--dark);
+            margin-bottom: 1.6rem;
+        }
+
+        /* La palabra "move" con subrayado animado — igual al nombre en el index */
+        .hero-underline {
+            position: relative;
+            display: inline-block;
+            color: var(--primary);
+        }
+
+        .hero-underline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: lineReveal 0.8s cubic-bezier(.25,.46,.45,.94) 0.9s forwards;
+        }
+
+        @keyframes lineReveal {
+            to { transform: scaleX(1); }
+        }
+
+        /* Subtítulo */
+        .video-hero p.hero-sub {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 400;
+            max-width: 440px;
+            line-height: 1.75;
+        }
+
+        /* Contador de proyectos — detalle extra */
+        .hero-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-top: 2.2rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #bbb;
+        }
+
+        .hero-count strong {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: -1px;
+        }
+
+        .hero-count-divider {
+            width: 1px;
+            height: 20px;
+            background: #e0e0e0;
+        }
+
+        /* responsive hero */
+        @media (max-width: 768px) {
+            .video-hero {
+                min-height: auto;
+                padding: 6rem 0 3rem;
+            }
+
+            .video-hero h1 {
+                letter-spacing: -1.5px;
+            }
+
+            .video-hero-line {
+                display: none;
+            }
+
+            .hero-count {
+                margin-top: 1.6rem;
+            }
+        }
+
+        /* ══════════════════════════════════════════════
+           FILTER TABS
+        ══════════════════════════════════════════════ */
+        .filter-section {
+            padding: 2rem 0 3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: none;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 2rem;
+            padding: 0.5rem 1.3rem;
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .filter-btn.active {
+            background: var(--dark);
+            border-color: var(--dark);
+            color: white;
+        }
+
+        .filter-btn[data-filter="motion"].active   { background: var(--primary); border-color: var(--primary); }
+        .filter-btn[data-filter="reel"].active     { background: var(--cyan);    border-color: var(--cyan);    color: var(--dark); }
+        .filter-btn[data-filter="video"].active    { background: #111;           border-color: #111; }
+
+        /* ══════════════════════════════════════════════
+           PROJECTS GRID
+        ══════════════════════════════════════════════ */
+        .projects-section {
+            padding-bottom: 6rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        /* Large card (video largo) spans 2 cols */
+        .project-card.large {
+            grid-column: span 2;
+        }
+
+        .project-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            background: #f5f5f5;
+            aspect-ratio: 16/9;
+            transition: transform 0.35s cubic-bezier(.25,.46,.45,.94),
+                        box-shadow 0.35s ease;
+        }
+
+        .project-card.large {
+            aspect-ratio: 16/9;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 48px rgba(0,0,0,0.14);
+        }
+
+        /* Thumbnail */
+        .card-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .card-thumb {
+            transform: scale(1.04);
+        }
+
+        /* Overlay */
+        .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(0,0,0,0.78) 0%,
+                rgba(0,0,0,0.2)  50%,
+                transparent      100%
+            );
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.4rem;
+        }
+
+        .project-card:hover .card-overlay {
+            opacity: 1;
+        }
+
+        /* Always-visible bottom strip */
+        .card-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 1.2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1.3;
+            flex: 1;
+        }
+
+        .card-category {
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 0.25rem 0.6rem;
+            border-radius: 2rem;
+            flex-shrink: 0;
+        }
+
+        .card-category.motion { background: var(--primary); color: white; }
+        .card-category.reel   { background: var(--cyan);    color: var(--dark); }
+        .card-category.video  { background: #111;           color: white; }
+
+        /* Play button (shown on hover) */
+        .card-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+        }
+
+        .card-play svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary);
+            margin-left: 3px;
+        }
+
+        .project-card:hover .card-play {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Placeholder thumbnail (gradient) when no real image */
+        .thumb-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .thumb-placeholder.motion-bg { background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #F50041 100%); }
+        .thumb-placeholder.reel-bg   { background: linear-gradient(135deg, #1a1a2e 0%, #00d2d3 100%); }
+        .thumb-placeholder.video-bg  { background: linear-gradient(135deg, #111 0%, #333 100%); }
+
+        .thumb-placeholder svg {
+            opacity: 0.18;
+            width: 48px;
+            height: 48px;
+            fill: white;
+        }
+
+        /* Hidden state for filter */
+        .project-card.hidden {
+            display: none;
+        }
+
+        /* ══════════════════════════════════════════════
+           MODAL / LIGHTBOX
+        ══════════════════════════════════════════════ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-box {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            background: #111;
+            border-radius: 16px;
+            overflow: hidden;
+            transform: scale(0.94) translateY(20px);
+            transition: transform 0.35s cubic-bezier(.25,.46,.45,.94);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+        }
+
+        .modal-overlay.open .modal-box {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-video-wrap {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            background: black;
+        }
+
+        .modal-video-wrap iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .modal-footer {
+            padding: 1.1rem 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .modal-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .modal-close {
+            background: rgba(255,255,255,0.08);
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .modal-close:hover {
+            background: var(--primary);
+        }
+
+        .modal-close svg {
+            width: 16px;
+            height: 16px;
+            stroke: white;
+            fill: none;
+        }
+
+        /* ══════════════════════════════════════════════
+           ANIMATIONS
+        ══════════════════════════════════════════════ */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .anim-1 { animation: fadeInUp 0.7s ease-out 0.1s both; }
+        .anim-2 { animation: fadeInUp 0.7s ease-out 0.2s both; }
+        .anim-3 { animation: fadeInUp 0.7s ease-out 0.3s both; }
+        .anim-4 { animation: fadeInUp 0.7s ease-out 0.4s both; }
+
+        /* reveal for grid cards */
+        .project-card.reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .project-card.reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ══════════════════════════════════════════════
+           RESPONSIVE
+        ══════════════════════════════════════════════ */
+        @media (max-width: 900px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .project-card.large {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card.large {
+                grid-column: span 1;
+            }
+
+            .video-hero {
+                padding: 5rem 0 2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Custom cursor -->
+    <div class="cursor-dot"  id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- ══════════════════════════════════════════════
+         HEADER
+    ══════════════════════════════════════════════ -->
+    <header id="siteHeader">
+        <div class="container">
+            <nav>
+                <ul id="navLinks">
+                    <li><a href="index.html"         data-i18n="nav.home">Home</a></li>
+                    <li><a href="404.html"            data-i18n="nav.about">About</a></li>
+                    <li><a href="video.html"          data-i18n="nav.work" class="active-nav">My Work</a></li>
+                </ul>
+                <div class="nav-right">
+                    <button class="lang-switch" id="langSwitch" aria-label="Switch language">
+                        <span class="lang-flag" id="langFlag">🇦🇷</span>
+                        <span class="lang-label" id="langLabel">ES</span>
+                    </button>
+                    <a href="index.html#contact" class="btn" data-i18n="nav.contact">Get in touch</a>
+                    <button class="hamburger" id="hamburger" aria-label="Menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════
+         HERO
+    ══════════════════════════════════════════════ -->
+    <section class="video-hero">
+
+        <!-- Decorative elements -->
+        <div class="video-hero-grain"></div>
+        <div class="video-hero-blob-red"></div>
+        <div class="video-hero-blob-cyan"></div>
+        <div class="video-hero-line"></div>
+
+        <div class="container video-hero-inner">
+
+            <a href="index.html" class="back-link anim-1">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 12L6 8l4-4"/>
+                </svg>
+                <span data-i18n="video.back">Back to home</span>
+            </a>
+
+            <div class="page-tag anim-2">
+                <span class="dot"></span>
+                <span data-i18n="video.tag">Motion & Video</span>
+            </div>
+
+            <h1 class="anim-3">
+                <span data-i18n="video.h1a">Creating stories</span><br>
+                that <span class="hero-underline" data-i18n="video.h1b">move</span>
+            </h1>
+
+            <p class="hero-sub anim-4" data-i18n="video.sub">
+                Motion graphics, social media reels, and video editing —<br>visual stories crafted frame by frame.
+            </p>
+
+            <div class="hero-count anim-4">
+                <strong>11</strong>
+                <div class="hero-count-divider"></div>
+                <span data-i18n="video.projects">Projects</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         FILTER BAR
+    ══════════════════════════════════════════════ -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all"    data-i18n="video.filterAll">All</button>
+                <button class="filter-btn"        data-filter="motion" data-i18n="video.filterMotion">Motion</button>
+                <button class="filter-btn"        data-filter="reel"   data-i18n="video.filterReel">Reels</button>
+                <button class="filter-btn"        data-filter="video"  data-i18n="video.filterVideo">Video</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         PROJECTS GRID
+    ══════════════════════════════════════════════ -->
+    <section class="projects-section">
+        <div class="container">
+            <div class="projects-grid" id="projectsGrid">
+
+                <!-- 1 – Reel: QK Carrera 01 -->
+                <article class="project-card reveal" data-category="reel" data-video-id="YOUTUBE_ID_HERE" data-title-en="QK Carrera — Reel 01" data-title-es="QK Carrera — Reel 01">
+                    <div class="thumb-placeholder reel-bg">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-play">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title" data-i18n="video.p1.title">QK Carrera — Reel 01</span>
+                        <span class="card-category reel" data-i18n="video.cat.reel">Reel</span>
+                    </div>
+                </article>
+
+                <!-- 2 – Reel: QK Carrera 02 -->
+                <article class="project-card reveal" data-category="reel" data-video-id="YOUTUBE_ID_HERE" data-title-en="QK Carrera — Reel 02" data-title-es="QK Carrera — Reel 02">
+                    <div class="thumb-placeholder reel-bg">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-play">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title" data-i18n="video.p2.title">QK Carrera — Reel 02</span>
+                        <span class="card-category reel" data-i18n="video.cat.reel">Reel</span>
+                    </div>
+                </article>
+
+                <!-- 3 – Video largo: Fragua -->
+                <article class="project-card large reveal" data-category="video" data-video-id="gxO70AxxDXU" data-title-en="Fragua" data-title-es="Fragua">
+                    <div class="thumb-placeholder video-bg">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-play">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title" data-i18n="video.p3.title">Fragua</span>
+                        <span class="card-category video" data-i18n="video.cat.video">Video</span>
+                    </div>
+                </article>
+
+                <!-- 4 – Reel: Isabel Orozco 01 -->
+                <article class="project-card reveal" data-category="reel" data-video-id="YOUTUBE_ID_HERE" data-title-en="Isabel Orozco — Reel 01" data-title-es="Isabel Orozco — Reel 01">
+                    <div class="thumb-placeholder reel-bg">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-play">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title" data-i18n="video.p4.title">Isabel Orozco — Reel 01</span>
+                        <span class="card-category reel" data-i18n="video.cat.reel">Reel</span>
+                    </div>
+                </article>
+
+                <!-- 5 – Motion: Logo Animation -->
+                <article class="project-card reveal" data-category="motion" data-video-id="YOUTUBE_ID_HERE" data-title-en="Logo Animation — Personal Project" data-title-es="Animación de Logo — Proyecto Personal">
+                    <div class="thumb-placeholder motion-bg">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <div class="card-play">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title" data-i18n="video.p5.title">Logo Animation — Personal Project</span>
+                        <span class="card-category motion" data-i18n="video.cat.motion">Motion</span>
+                    </div>
+                </article>
+
+                <!-- 6 – Reel: Isabel Orozco 02 -->
+                <article class="project-card reveal" data-category="reel" data-video-id="YOUTUBE_ID_HERE" data-title-en="Isabel Orozco — Reel 02" data-title-es="Isabel Orozco — Reel 02">
+                    <div class="thumb-placeholder reel-bg">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-play">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title" data-i18n="video.p6.title">Isabel Orozco — Reel 02</span>
+                        <span class="card-category reel" data-i18n="video.cat.reel">Reel</span>
+                    </div>
+                </article>
+
+                <!-- 7 – Video largo: Cortometraje Facultad -->
+                <article class="project-card large reveal" data-category="video" data-video-id="YOUTUBE_ID_HERE" data-title-en="Short Film — Faculty" data-title-es="Cortometraje — Facultad">
+                    <div class="thumb-placeholder video-bg">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-play">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title" data-i18n="video.p7.title">Short Film — Faculty</span>
+                        <span class="card-category video" data-i18n="video.cat.video">Video</span>
+                    </div>
+                </article>
+
+                <!-- 8 – Reel: Isabel Orozco 03 -->
+                <article class="project-card reveal" data-category="reel" data-video-id="YOUTUBE_ID_HERE" data-title-en="Isabel Orozco — Reel 03" data-title-es="Isabel Orozco — Reel 03">
+                    <div class="thumb-placeholder reel-bg">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-play">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title" data-i18n="video.p8.title">Isabel Orozco — Reel 03</span>
+                        <span class="card-category reel" data-i18n="video.cat.reel">Reel</span>
+                    </div>
+                </article>
+
+                <!-- 9 – Motion: Motion Studies -->
+                <article class="project-card reveal" data-category="motion" data-video-id="YOUTUBE_ID_HERE" data-title-en="Motion Studies" data-title-es="Experimentos de Motion">
+                    <div class="thumb-placeholder motion-bg">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <div class="card-play">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title" data-i18n="video.p9.title">Motion Studies</span>
+                        <span class="card-category motion" data-i18n="video.cat.motion">Motion</span>
+                    </div>
+                </article>
+
+                <!-- 10 – Reel: Políticas Solidarias 01 -->
+                <article class="project-card reveal" data-category="reel" data-video-id="YOUTUBE_ID_HERE" data-title-en="Políticas Solidarias — Reel 01" data-title-es="Políticas Solidarias — Reel 01">
+                    <div class="thumb-placeholder reel-bg">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-play">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title" data-i18n="video.p10.title">Políticas Solidarias — Reel 01</span>
+                        <span class="card-category reel" data-i18n="video.cat.reel">Reel</span>
+                    </div>
+                </article>
+
+                <!-- 11 – Reel: Políticas Solidarias 02 -->
+                <article class="project-card reveal" data-category="reel" data-video-id="YOUTUBE_ID_HERE" data-title-en="Políticas Solidarias — Reel 02" data-title-es="Políticas Solidarias — Reel 02">
+                    <div class="thumb-placeholder reel-bg">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-play">
+                        <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-title" data-i18n="video.p11.title">Políticas Solidarias — Reel 02</span>
+                        <span class="card-category reel" data-i18n="video.cat.reel">Reel</span>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         MODAL
+    ══════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-box" id="modalBox">
+            <div class="modal-video-wrap">
+                <iframe
+                    id="modalIframe"
+                    src=""
+                    allow="autoplay; fullscreen"
+                    allowfullscreen
+                ></iframe>
+            </div>
+            <div class="modal-footer">
+                <span class="modal-title" id="modalTitle"></span>
+                <button class="modal-close" id="modalClose" aria-label="Close">
+                    <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         FOOTER
+    ══════════════════════════════════════════════ -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h3>LUPE HOLSMAN</h3>
+                <p data-i18n="footer.role">Multimedia Designer</p>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-contact">
+                <p>+54 221 596 4111</p>
+                <p>guadalupeholsman@gmail.com</p>
+                <p>La Plata, Buenos Aires, Argentina</p>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-icon"><img src="img/icon-whatsapp.png"  alt="WhatsApp"></a>
+                <a href="https://www.linkedin.com/in/guadalupe-holsman" class="social-icon"><img src="img/icon-linkedin.png"  alt="LinkedIn"></a>
+                <a href="#" class="social-icon"><img src="img/icon-instagram.png" alt="Instagram"></a>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+
+        // ══════════════════════════════════════════════════════════════════
+        //  TRANSLATIONS
+        // ══════════════════════════════════════════════════════════════════
+        const translations = {
+            en: {
+                nav: {
+                    home: 'Home', about: 'About', work: 'My Work', contact: 'Get in touch'
+                },
+                video: {
+                    back:         'Back to home',
+                    tag:          'Motion & Video',
+                    h1a:          'Creating stories',
+                    h1b:          'that move',
+                    sub:          'Motion graphics, social media reels, and video editing —\nvisual stories crafted frame by frame.',
+                    filterAll:    'All',
+                    projects:     'Projects',
+                    filterMotion: 'Motion',
+                    filterReel:   'Reels',
+                    filterVideo:  'Video',
+                    cat: { motion: 'Motion', reel: 'Reel', video: 'Video' },
+                    p1:  { title: 'QK Carrera — Reel 01' },
+                    p2:  { title: 'QK Carrera — Reel 02' },
+                    p3:  { title: 'Fragua' },
+                    p4:  { title: 'Isabel Orozco — Reel 01' },
+                    p5:  { title: 'Logo Animation — Personal Project' },
+                    p6:  { title: 'Isabel Orozco — Reel 02' },
+                    p7:  { title: 'Short Film — Faculty' },
+                    p8:  { title: 'Isabel Orozco — Reel 03' },
+                    p9:  { title: 'Motion Studies' },
+                    p10: { title: 'Políticas Solidarias — Reel 01' },
+                    p11: { title: 'Políticas Solidarias — Reel 02' }
+                },
+                footer: { role: 'Multimedia Designer' }
+            },
+            es: {
+                nav: {
+                    home: 'Inicio', about: 'Sobre mí', work: 'Mi trabajo', contact: 'Contactame'
+                },
+                video: {
+                    back:         'Volver al inicio',
+                    tag:          'Motion & Video',
+                    h1a:          'Historias que',
+                    h1b:          'cobran vida',
+                    sub:          'Motion graphics, reels para redes y edición de video —\nhistorias visuales hechas cuadro a cuadro.',
+                    filterAll:    'Todo',
+                    projects:     'Proyectos',
+                    filterMotion: 'Motion',
+                    filterReel:   'Reels',
+                    filterVideo:  'Video',
+                    cat: { motion: 'Motion', reel: 'Reel', video: 'Video' },
+                    p1:  { title: 'QK Carrera — Reel 01' },
+                    p2:  { title: 'QK Carrera — Reel 02' },
+                    p3:  { title: 'Fragua' },
+                    p4:  { title: 'Isabel Orozco — Reel 01' },
+                    p5:  { title: 'Animación de Logo — Proyecto Personal' },
+                    p6:  { title: 'Isabel Orozco — Reel 02' },
+                    p7:  { title: 'Cortometraje — Facultad' },
+                    p8:  { title: 'Isabel Orozco — Reel 03' },
+                    p9:  { title: 'Experimentos de Motion' },
+                    p10: { title: 'Políticas Solidarias — Reel 01' },
+                    p11: { title: 'Políticas Solidarias — Reel 02' }
+                },
+                footer: { role: 'Diseñadora Multimedia' }
+            }
+        };
+
+
+        // ══════════════════════════════════════════════════════════════════
+        //  TRANSLATION ENGINE
+        // ══════════════════════════════════════════════════════════════════
+        function getT(lang, key) {
+            return key.split('.').reduce((obj, k) => (obj && obj[k] !== undefined ? obj[k] : null), translations[lang]);
+        }
+
+        function applyLang(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const val = getT(lang, el.dataset.i18n);
+                if (val !== null) {
+                    el.innerHTML = val;
+                    el.classList.add('lang-fade');
+                    el.addEventListener('animationend', () => el.classList.remove('lang-fade'), { once: true });
+                }
+            });
+
+            document.documentElement.lang = lang;
+            const isES = lang === 'es';
+            document.getElementById('langFlag').textContent  = isES ? '🇺🇸' : '🇦🇷';
+            document.getElementById('langLabel').textContent = isES ? 'EN' : 'ES';
+
+            // Update modal title if open
+            const openCard = document.querySelector('.project-card[data-active]');
+            if (openCard) {
+                document.getElementById('modalTitle').textContent =
+                    lang === 'es' ? openCard.dataset.titleEs : openCard.dataset.titleEn;
+            }
+        }
+
+        let currentLang = localStorage.getItem('lupe-lang') || 'en';
+        applyLang(currentLang);
+
+        document.getElementById('langSwitch').addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'es' : 'en';
+            localStorage.setItem('lupe-lang', currentLang);
+            applyLang(currentLang);
+        });
+
+
+        // ══════════════════════════════════════════════════════════════════
+        //  HAMBURGER
+        // ══════════════════════════════════════════════════════════════════
+        const hamburger = document.getElementById('hamburger');
+        const navLinks  = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            navLinks.classList.toggle('mobile-open');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                navLinks.classList.remove('mobile-open');
+            });
+        });
+
+
+        // ══════════════════════════════════════════════════════════════════
+        //  STICKY HEADER
+        // ══════════════════════════════════════════════════════════════════
+        const siteHeader = document.getElementById('siteHeader');
+        window.addEventListener('scroll', () => {
+            siteHeader.classList.toggle('scrolled', window.scrollY > 20);
+        });
+
+
+        // ══════════════════════════════════════════════════════════════════
+        //  CUSTOM CURSOR
+        // ══════════════════════════════════════════════════════════════════
+        const cursorDot  = document.getElementById('cursorDot');
+        const cursorRing = document.getElementById('cursorRing');
+        let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
+        });
+
+        (function animateRing() {
+            ringX += (mouseX - ringX) * 0.14;
+            ringY += (mouseY - ringY) * 0.14;
+            cursorRing.style.transform = `translate(calc(${ringX}px - 50%), calc(${ringY}px - 50%))`;
+            requestAnimationFrame(animateRing);
+        })();
+
+
+        // ══════════════════════════════════════════════════════════════════
+        //  FILTER
+        // ══════════════════════════════════════════════════════════════════
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards      = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+
+                cards.forEach(card => {
+                    const match = filter === 'all' || card.dataset.category === filter;
+                    card.classList.toggle('hidden', !match);
+                });
+            });
+        });
+
+
+        // ══════════════════════════════════════════════════════════════════
+        //  MODAL
+        // ══════════════════════════════════════════════════════════════════
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalIframe  = document.getElementById('modalIframe');
+        const modalTitle   = document.getElementById('modalTitle');
+        const modalClose   = document.getElementById('modalClose');
+
+        function openModal(card) {
+            const videoId = card.dataset.videoId;
+            const title   = currentLang === 'es' ? card.dataset.titleEs : card.dataset.titleEn;
+
+            // mark active for lang sync
+            document.querySelectorAll('.project-card[data-active]').forEach(c => delete c.dataset.active);
+            card.dataset.active = 'true';
+
+            modalIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+            modalTitle.textContent = title;
+            modalOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('open');
+            modalIframe.src = '';
+            document.body.style.overflow = '';
+            const active = document.querySelector('.project-card[data-active]');
+            if (active) delete active.dataset.active;
+        }
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => openModal(card));
+        });
+
+        modalClose.addEventListener('click', closeModal);
+
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+
+        // ══════════════════════════════════════════════════════════════════
+        //  INTERSECTION OBSERVER — reveal cards
+        // ══════════════════════════════════════════════════════════════════
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (!entry.isIntersecting) return;
+                setTimeout(() => {
+                    entry.target.classList.add('is-visible');
+                }, i * 80);
+                revealObserver.unobserve(entry.target);
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.project-card.reveal').forEach(el => revealObserver.observe(el));
+
+    </script>
+</body>
+</html>
