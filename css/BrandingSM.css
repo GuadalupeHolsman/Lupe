@@ -139,83 +139,59 @@
 
 /* ── CARDS ───────────────────────────────────── */
 .bsm-proj-card {
-    flex: 0 0 260px;
-    height: 330px;
+    flex: 0 0 340px;
+    height: 420px;
     background: #1c1c1c;
+    background-image: none;
     border-radius: 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    padding: 2rem 1.8rem 2.2rem;
     scroll-snap-align: start;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    cursor: pointer;
+    transition: transform 0.4s;
     position: relative;
     overflow: hidden;
 }
 
-/* Letra decorativa de fondo */
-.bsm-proj-card::before {
-    content: attr(data-letter);
-    position: absolute;
-    font-size: 15rem;
-    font-weight: 900;
-    color: rgba(255,255,255,0.032);
-    line-height: 1;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -48%);
-    pointer-events: none;
-    z-index: 0;
-    font-family: 'Raleway', sans-serif;
-    letter-spacing: -8px;
-}
 
-/* Gradiente que aparece en hover */
-.bsm-proj-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.7) 100%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 1;
-}
+
+
 
 .bsm-proj-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 28px 60px rgba(0,0,0,0.45);
+   background: pink;
+   background-image: linear-gradient(135deg, #1c1c1c 0%, #2a2a2a 100%);
 }
 
-.bsm-proj-card:hover::after { opacity: 1; }
 
-/* Imagen del logo */
+/* Imagen del logo — posicionada arriba */
 .proj-logo-img {
-    max-width: 65%;
-    max-height: 120px;
+   
+    padding: 5.2rem 0 1.5rem;
     object-fit: contain;
     position: relative;
     z-index: 2;
     transition: transform 0.4s cubic-bezier(.25,.46,.45,.94);
-    filter: brightness(0) invert(1);
-}
+    }
 
 .bsm-proj-card:hover .proj-logo-img {
-    transform: translateY(-16px);
+    transform: translateY(-12px);
+    max-width: 120%;
 }
 
-/* Servicios — aparecen desde abajo */
+/* Servicios — aparecen desde abajo con más espacio */
 .bsm-proj-services {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 1.2rem 1.8rem 1.8rem;
+    padding: 2rem 1.8rem 2.2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.15rem;
-    transform: translateY(110%);
+    gap: 0.4rem;
+    transform: translateY(120%);
     opacity: 0;
     transition: transform 0.4s cubic-bezier(.25,.46,.45,.94), opacity 0.35s ease;
     z-index: 3;
@@ -224,10 +200,10 @@
 
 .bsm-proj-services span {
     color: var(--cyan);
-    font-size: 0.78rem;
+    font-size: 0.80rem;
     font-weight: 700;
     letter-spacing: 0.2px;
-    line-height: 1.55;
+    line-height: 1.6;
 }
 
 .bsm-proj-card:hover .bsm-proj-services {
@@ -255,6 +231,11 @@
     color: var(--dark);
     transition: box-shadow 0.3s ease, transform 0.3s ease, background 0.3s ease;
     z-index: 5;
+}
+
+.bsm-carousel-btn--prev {
+    right: auto;
+    left: -18px;
 }
 
 .bsm-carousel-btn:hover {
@@ -375,8 +356,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.4rem;
-    max-width: 750px;
-    margin: 0 auto;
 }
 
 .bsm-logo-tile {
@@ -412,95 +391,129 @@
 }
 
 
-/* ── CONTACT ─────────────────────────────────── */
-.bsm-contact {
-    background: #f7f7f7;
-    padding: 7rem 0 8rem;
+/* ── POSTS GALLERY ───────────────────────────── */
+.bsm-posts {
+    background: #111;
+    padding: 6rem 0 7rem;
 }
 
-.bsm-contact-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: flex-start;
+.bsm-posts-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 2.8rem;
 }
 
-.bsm-contact-text h2 {
-    font-size: 2.4rem;
+.bsm-posts-header .bsm-label { color: var(--cyan); }
+
+.bsm-posts-header h2 {
+    font-size: 2.2rem;
     font-weight: 900;
-    line-height: 1.15;
     letter-spacing: -0.5px;
-    color: var(--dark);
-    margin-bottom: 1rem;
+    color: #fff;
+    margin: 0.4rem 0 0;
 }
 
-.bsm-contact-text p {
-    font-size: 0.9rem;
+.bsm-posts-tagline {
+    font-size: 0.78rem;
     color: #666;
-    line-height: 1.8;
-}
-
-.bsm-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-}
-
-.bsm-form-group {
-    border-top: 1px solid #ddd;
-    padding: 1rem 0 0.3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-}
-
-.bsm-form-group:last-of-type {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 0.8rem;
-}
-
-.bsm-form-group label {
-    font-size: 0.65rem;
-    font-weight: 800;
-    letter-spacing: 2px;
+    text-align: right;
+    max-width: 200px;
+    line-height: 1.6;
     text-transform: uppercase;
-    color: #999;
+    letter-spacing: 0.3px;
 }
 
-.bsm-form-group input,
-.bsm-form-group textarea {
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.9rem;
-    color: var(--dark);
-    background: transparent;
-    border: none;
-    outline: none;
-    resize: none;
-    width: 100%;
-    padding: 0;
-    font-weight: 500;
+.bsm-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.7rem;
 }
 
-.bsm-form-group input::placeholder,
-.bsm-form-group textarea::placeholder {
-    color: #bbb;
+.bsm-post-tile {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #1e1e1e;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
-.bsm-form .btn {
-    margin-top: 2rem;
-    align-self: flex-start;
+.bsm-post-tile:hover {
+    transform: scale(1.03);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+    z-index: 2;
 }
 
-.bsm-form-success {
-    font-size: 0.85rem;
-    color: var(--cyan);
-    font-weight: 700;
-    margin-top: 0.75rem;
+/* Placeholder gradient tiles */
+.bsm-post-tile::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--tile-bg, linear-gradient(135deg, #1c1c1c, #2a2a2a));
+}
+
+/* Hover overlay */
+.bsm-post-tile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,194,199,0.12);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-.bsm-form-success.visible { opacity: 1; }
+.bsm-post-tile:hover::after { opacity: 1; }
+
+.bsm-post-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 1;
+    display: block;
+}
+
+/* Featured tile — spans 2 cols */
+.bsm-post-tile.featured {
+    grid-column: span 2;
+    grid-row: span 2;
+    border-radius: 12px;
+}
+
+/* Color palettes for placeholder tiles */
+.bsm-post-tile:nth-child(1) { --tile-bg: linear-gradient(135deg, #0f0f0f, #1a1a2e); }
+.bsm-post-tile:nth-child(2) { --tile-bg: linear-gradient(135deg, #1a0a1a, #2d1b2d); }
+.bsm-post-tile:nth-child(3) { --tile-bg: linear-gradient(135deg, #0a1a1a, #0d2e2e); }
+.bsm-post-tile:nth-child(4) { --tile-bg: linear-gradient(135deg, #1a0d09, #2e1a10); }
+.bsm-post-tile:nth-child(5) { --tile-bg: linear-gradient(135deg, #0f0f0f, #1c1c1c); }
+.bsm-post-tile:nth-child(6) { --tile-bg: linear-gradient(135deg, #0a0e1a, #121830); }
+.bsm-post-tile:nth-child(7) { --tile-bg: linear-gradient(135deg, #130a1a, #1d0e28); }
+.bsm-post-tile:nth-child(8) { --tile-bg: linear-gradient(135deg, #001a1a, #002a2a); }
+
+/* Label inside placeholder */
+.bsm-post-tile .post-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+    pointer-events: none;
+}
+
+
+/* ── CONTACT (index-style override) ─────────── */
+/* Asegura que la sección de contacto tome los estilos de index */
+#contact.contact-section {
+    background: #fafafa;
+}
 
 
 /* ── REVEAL ANIMATIONS ───────────────────────── */
@@ -530,9 +543,8 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .bsm-contact-inner {
-        grid-template-columns: 1fr;
-        gap: 3rem;
+    .bsm-posts-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -561,8 +573,9 @@
     }
 
     .bsm-proj-card {
-        flex: 0 0 220px;
-        height: 280px;
+        flex: 0 0 260px;
+        height: 340px;
+        padding-top: 50px;
     }
 
     .bsm-expertise-left h2 {
@@ -575,6 +588,21 @@
 
     .bsm-logofolio h2 {
         font-size: 2.2rem;
+    }
+
+    .bsm-posts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bsm-posts-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .bsm-posts-tagline {
+        text-align: left;
+        max-width: 100%;
     }
 
     .bsm-logo-grid {
