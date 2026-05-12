@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Illustration — Lupe Holsman</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/Illustration.css">
+</head>
+
+<body>
+
+    <div class="cursor-dot"  id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- ══ HEADER ══════════════════════════════ -->
+    <header id="siteHeader">
+        <div class="container">
+            <nav>
+                <ul id="navLinks">
+                    <li><a href="index.html"     data-i18n="nav.home">Home</a></li>
+                    <li><a href="404.html"        data-i18n="nav.about">About</a></li>
+                    <li><a href="index.html#work" data-i18n="nav.work">My Work</a></li>
+                </ul>
+                <div class="nav-right">
+                    <button class="lang-switch" id="langSwitch" aria-label="Switch language">
+                        <span class="lang-flag" id="langFlag">🇦🇷</span>
+                        <span class="lang-label" id="langLabel">ES</span>
+                    </button>
+                    <a href="index.html#contact" class="btn" data-i18n="nav.contact">Get in touch</a>
+                    <button class="hamburger" id="hamburger" aria-label="Menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ══ HERO ════════════════════════════ -->
+        <section class="illus-hero">
+            <div class="container illus-hero-content">
+                <div class="illus-hero-title reveal">
+                    <h1><span>Visual</span> <em>Narratives</em> & Art</h1>
+                </div>
+                <p class="illus-hero-desc reveal" data-i18n="hero.desc">
+                    Character Design, Digital Painting, and the Creative Process Behind Every Line.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- ══ CHARACTERS ══════════════════════ -->
+        <section class="illus-characters">
+            <div class="container">
+                <span class="bsm-label reveal" data-i18n="char.label">Characters</span>
+                <h2 class="reveal" data-i18n="char.title" style="font-size: 3rem; font-weight: 900; margin-bottom: 1rem;">Character Archive</h2>
+                
+                <div class="illus-char-grid">
+                    <!-- Character 1 -->
+                    <div class="illus-char-item reveal from-left">
+                        <div class="illus-char-img-wrap">
+                            <img src="img/character-ref-1.png" alt="Character Design 1">
+                        </div>
+                        <div class="illus-char-info">
+                            <h3 data-i18n="char.1.name">Protagonist Alpha</h3>
+                            <p data-i18n="char.1.desc">Exploration of silhouettes and personality through expressive posing and a vibrant color palette.</p>
+                            <div class="illus-char-tags">
+                                <span>Concept</span>
+                                <span>Digital</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Character 2 -->
+                    <div class="illus-char-item reveal from-right">
+                        <div class="illus-char-img-wrap">
+                            <img src="img/character-ref-2.png" alt="Character Design 2">
+                        </div>
+                        <div class="illus-char-info">
+                            <h3 data-i18n="char.2.name">The Guardian</h3>
+                            <p data-i18n="char.2.desc">World-building through costume design and material rendering.</p>
+                            <div class="illus-char-tags">
+                                <span>Outfit</span>
+                                <span>Worldbuilding</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ══ GALLERY ═════════════════════════ -->
+        <section class="illus-gallery">
+            <div class="container">
+                <span class="bsm-label reveal" data-i18n="gallery.label">Artworks</span>
+                <h2 class="reveal" data-i18n="gallery.title" style="font-size: 2.5rem; font-weight: 800; margin-bottom: 2rem;">Digital Gallery</h2>
+
+                <div class="illus-gallery-grid">
+                    <div class="illus-gallery-item reveal"><img src="img/art-1.png" alt="Art 1"></div>
+                    <div class="illus-gallery-item reveal"><img src="img/art-2.png" alt="Art 2"></div>
+                    <div class="illus-gallery-item reveal"><img src="img/art-3.png" alt="Art 3"></div>
+                    <div class="illus-gallery-item reveal"><img src="img/art-4.png" alt="Art 4"></div>
+                    <div class="illus-gallery-item reveal"><img src="img/art-5.png" alt="Art 5"></div>
+                    <div class="illus-gallery-item reveal"><img src="img/art-6.png" alt="Art 6"></div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ══ SKETCHBOOK ══════════════════════ -->
+        <section class="illus-sketchbook">
+            <div class="container">
+                <span class="bsm-label reveal" data-i18n="sketch.label">The Process</span>
+                <h2 class="reveal" data-i18n="sketch.title" style="font-size: 2.5rem; font-weight: 800; margin-bottom: 2rem;">Sketchbook</h2>
+                
+                <div class="sketch-stream">
+                    <div class="sketch-card reveal" style="--rotation: -2deg;"><img src="img/sketch-1.png" alt="Sketch 1"></div>
+                    <div class="sketch-card reveal" style="--rotation: 3deg;"><img src="img/sketch-2.png" alt="Sketch 2"></div>
+                    <div class="sketch-card reveal" style="--rotation: -1deg;"><img src="img/sketch-3.png" alt="Sketch 3"></div>
+                    <div class="sketch-card reveal" style="--rotation: 4deg;"><img src="img/sketch-4.png" alt="Sketch 4"></div>
+                    <div class="sketch-card reveal" style="--rotation: -3deg;"><img src="img/sketch-5.png" alt="Sketch 5"></div>
+                </div>
+            </div>
+        </section>
+
+<section class="contact-section" id="contact">
+        <div class="container contact-wrapper">
+
+            <div class="contact-text reveal from-left">
+                <h2 data-i18n="contact.title">Let's build something <span class="text-cyan">together</span></h2>
+                <p data-i18n="contact.subtitle">Have a project in mind? Send me a message and I'll get back to you as soon as possible.</p>
+            </div>
+
+            <form class="contact-form reveal from-right" id="contactForm">
+                <div class="form-group">
+                    <label for="name" data-i18n="contact.form.name">Name</label>
+                    <input type="text" id="name" data-i18n-placeholder="contact.form.namePlaceholder" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" data-i18n="contact.form.email">Email</label>
+                    <input type="email" id="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="message" data-i18n="contact.form.message">Message</label>
+                    <textarea id="message" rows="5" data-i18n-placeholder="contact.form.messagePlaceholder" placeholder="Tell me about your project..." required></textarea>
+                </div>
+                <button type="submit" class="btn" data-i18n="contact.form.send">Send message</button>
+                <p class="form-success" id="formSuccess" data-i18n="contact.form.success">Message sent! I'll be in touch soon ✦</p>
+            </form>
+
+        </div>
+    </section>
+       
+
+    </main>
+
+
+    <!-- ══ FOOTER ═══════════════════════════════ -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h3>LUPE HOLSMAN</h3>
+                <p data-i18n="footer.role">Multimedia Designer</p>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-contact">
+                <p>+54 221 596 4111</p>
+                <p>guadalupeholsman@gmail.com</p>
+                <p>La Plata, Buenos Aires, Argentina</p>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-icon" aria-label="WhatsApp"><img src="img/icon-whatsapp.png" alt="WhatsApp"></a>
+                <a href="https://www.linkedin.com/in/guadalupe-holsman" class="social-icon" aria-label="LinkedIn"><img src="img/icon-linkedin.png" alt="LinkedIn"></a>
+                <a href="#" class="social-icon" aria-label="Instagram"><img src="img/icon-instagram.png" alt="Instagram"></a>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+    // ── CURSOR ──────────────────────────────────
+    const cursorDot  = document.getElementById('cursorDot');
+    const cursorRing = document.getElementById('cursorRing');
+    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+    window.addEventListener('mousemove', e => {
+        mouseX = e.clientX; mouseY = e.clientY;
+        cursorDot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
+    });
+
+    (function animateRing() {
+        ringX += (mouseX - ringX) * 0.14;
+        ringY += (mouseY - ringY) * 0.14;
+        cursorRing.style.transform = `translate(calc(${ringX}px - 50%), calc(${ringY}px - 50%))`;
+        requestAnimationFrame(animateRing);
+    })();
+
+
+    // ── STICKY HEADER ───────────────────────────
+    const siteHeader = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => {
+        siteHeader.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // ── HAMBURGER ───────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('mobile-open');
+    });
+
+
+    // ── SCROLL REVEAL ───────────────────────────
+    const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+        });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+
+    // ── LANGUAGE SWITCH ─────────────────────────
+    const translations = {
+        en: {
+            nav: { home: 'Home', about: 'About', work: 'My Work', contact: 'Get in touch' },
+            hero: { desc: 'Character Design, Digital Painting, and the Creative Process Behind Every Line.' },
+            char: { label: 'Characters', title: 'Character Archive', 1: { name: 'Protagonist Alpha', desc: 'Exploration of silhouettes and personality.' }, 2: { name: 'The Guardian', desc: 'World-building through costume design.' } },
+            gallery: { label: 'Artworks', title: 'Digital Gallery' },
+            sketch: { label: 'The Process', title: 'Sketchbook' },
+            contact: { title: "Let's draw something new", btn: 'Start a project' },
+            footer: { role: 'Multimedia Designer' }
+        },
+        es: {
+            nav: { home: 'Inicio', about: 'Sobre mí', work: 'Mi trabajo', contact: 'Contactame' },
+            hero: { desc: 'Diseño de personajes, pintura digital y el proceso creativo detrás de cada trazo.' },
+            char: { label: 'Personajes', title: 'Archivo de Personajes', 1: { name: 'Protagonista Alpha', desc: 'Exploración de siluetas y personalidad.' }, 2: { name: 'El Guardián', desc: 'Construcción de mundos a través del diseño de vestuario.' } },
+            gallery: { label: 'Obras', title: 'Galería Digital' },
+            sketch: { label: 'El Proceso', title: 'Sketchbook' },
+            contact: { title: 'Dibujemos algo nuevo', btn: 'Empezar proyecto' },
+            footer: { role: 'Diseñadora Multimedia' }
+        }
+    };
+
+    function getT(lang, key) {
+        return key.split('.').reduce((obj, k) => (obj && obj[k] !== undefined ? obj[k] : null), translations[lang]);
+    }
+
+    function applyLang(lang) {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const val = getT(lang, el.dataset.i18n);
+            if (val !== null) {
+                el.innerHTML = val;
+                el.classList.add('lang-fade');
+                el.addEventListener('animationend', () => el.classList.remove('lang-fade'), { once: true });
+            }
+        });
+
+        document.documentElement.lang = lang;
+        const isES = lang === 'es';
+        document.getElementById('langFlag').textContent  = isES ? '🇺🇸' : '🇦🇷';
+        document.getElementById('langLabel').textContent = isES ? 'EN' : 'ES';
+    }
+
+    let currentLang = localStorage.getItem('lupe-lang') || 'en';
+    applyLang(currentLang);
+
+    document.getElementById('langSwitch').addEventListener('click', () => {
+        currentLang = currentLang === 'en' ? 'es' : 'en';
+        localStorage.setItem('lupe-lang', currentLang);
+        applyLang(currentLang);
+    });
+    </script>
+
+</body>
+</html>
